@@ -48,22 +48,63 @@ Authentic photorealistic side-profile visualization with real-time CSS shaders f
 
 ---
 
-## ⚡ Key Highlights
+## 🔄 Runtime Interaction Workflow Pipeline
 
-- **180-Frame Volumetric Scrubbing**: Canvas-rendered sequence with zero lag using pre-buffered high-efficiency WebP frames.
-- **Dynamic Telemetry & Audio Synthesizer**: Procedural Web Audio API engine acoustic synthesizer (interactive acceleration sound), live HUD telemetry readouts, radar ping hotspots, and interactive technical blueprint modals.
-- **Track Simulator / Auto-Drive**: Autonomous cruise simulation looping through the car's volumetric sequence with real-time speed adjustments.
-- **Luxury Brutalist Design System**: Deep black obsidian backgrounds (`#030406`), solar titanium gold accents (`#F59E0B`, `#FBBF24`), liquid chrome gradients, and glassmorphism.
+The interaction pipeline orchestrates momentum physics, timeline progress, canvas sequence drawing, and parallel audio/telemetry loops at 60 FPS:
+
+<p align="center">
+  <img src="public/assets/aureon_workflow_architecture.png" alt="Aureon Runtime Interaction Workflow Pipeline" width="100%" />
+</p>
+
+### Workflow Architecture Steps:
+1. **Input Capture**: User wheel, touch gestures, trackpad momentum, or autonomous Track Simulator RAF ticks.
+2. **Lenis Physics Engine**: Intercepts raw scroll deltas and applies cubic-bezier inertia dampening (`cubic-bezier(0.16, 1, 0.3, 1)`).
+3. **GSAP ScrollTrigger**: Normalizes scroll distance across the 3 story phases into a deterministic float `[0.000, 1.000]`.
+4. **Canvas 2D Volumetric Blit**: Maps progress to the active frame index (1–180) and renders pre-buffered WebP frames to the full-viewport canvas.
+5. **Parallel Subsystem Execution**:
+   - **Procedural Audio Synthesizer**: Adjusts dual-oscillator frequencies and bandpass filters according to the current frame velocity.
+   - **Telemetry HUD**: Updates live frame numbers, phase indicators, and kinetic sparklines.
+   - **Atelier Configurator**: Handles real-time CSS SVG filters, chassis glow, and dynamic specification cards.
+
+```mermaid
+graph LR
+    A[User Scroll / Touch / RAF] --> B[Lenis Physics Engine]
+    B --> C[GSAP ScrollTrigger Progress]
+    C --> D[HTML5 Canvas 2D Blit]
+    D --> E[180-Frame WebP Buffer]
+    D --> F[Web Audio Engine]
+    D --> G[Real-Time HUD Telemetry]
+    D --> H[Atelier CSS Shaders]
+    
+    style A fill:#0c1018,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style B fill:#0c1018,stroke:#38bdf8,stroke-width:2px,color:#fff
+    style C fill:#0c1018,stroke:#10b981,stroke-width:2px,color:#fff
+    style D fill:#0c1018,stroke:#f59e0b,stroke-width:2px,color:#fff
+    style E fill:#1e293b,stroke:#f59e0b,stroke-width:1px,color:#fff
+    style F fill:#1e293b,stroke:#f59e0b,stroke-width:1px,color:#fff
+    style G fill:#1e293b,stroke:#38bdf8,stroke-width:1px,color:#fff
+    style H fill:#1e293b,stroke:#10b981,stroke-width:1px,color:#fff
+```
 
 ---
 
-## 🛠️ Tech Stack
+## 🏛️ Technical Framework & Architecture Stack
 
-- **Core**: Vanilla HTML5, Vanilla CSS3 (Custom Design System), Modern JavaScript (ESModules)
-- **Bundler & Dev Server**: [Vite](https://vitejs.dev/)
-- **Animation & Scrubbing**: [GSAP](https://gsap.com/) & [ScrollTrigger](https://gsap.com/scrolltrigger/)
-- **Smooth Scrolling**: [@studio-freight/lenis](https://github.com/darkroomengineering/lenis)
-- **Audio Engine**: Native HTML5 Web Audio API (real-time procedural oscillator & acoustic synthesis)
+Built entirely on modern web standards with zero heavy framework overhead for maximum hardware acceleration:
+
+<p align="center">
+  <img src="public/assets/aureon_framework_diagram.png" alt="Aureon Technical Framework & Architecture Stack" width="100%" />
+</p>
+
+### Framework Stack Breakdown:
+
+| Layer | Architecture Component | Technologies / Libraries | Core Responsibility |
+| :--- | :--- | :--- | :--- |
+| **Layer 05** | **Application & UI Layer** | Semantic HTML5, Vanilla CSS3 | Glassmorphic HUD, Hotspot Radar Pings, Commissioning Modals |
+| **Layer 04** | **Kinetic Animation & Physics** | GSAP 3, ScrollTrigger, Lenis | Scroll scrubbing, easing physics, smooth momentum interpolation |
+| **Layer 03** | **Volumetric Media & Rendering** | HTML5 Canvas 2D, WebP Sequences | 180 volumetric preloaded frames, zero-jank frame blitting |
+| **Layer 02** | **Audio & Telemetry Subsystem** | Native Web Audio API | Procedural dual-oscillator acoustic exhaust synthesis & RPM shift |
+| **Layer 01** | **Build & Platform Runtime** | Vite 6, Modern ESModules | Sub-millisecond HMR, zero-bloat tree-shaking, production bundling |
 
 ---
 
@@ -127,19 +168,21 @@ npm run preview
 Aureon/
 ├── public/
 │   └── assets/
-│       ├── aureon_hero_banner.jpg           # Flagship GitHub hero preview banner
-│       ├── aureon_phases_showcase.jpg       # 3-Phase panoramic showcase
-│       ├── aureon_configurator_preview.jpg  # Photorealistic Atelier studio preview
-│       ├── aureon_side_profile.webp         # High-resolution car side profile render
-│       ├── phase1/                          # Frames 001 - 060 (Genesis Exterior 360)
-│       ├── phase2/                          # Frames 061 - 120 (Chassis & Powertrain X-Ray)
-│       └── phase3/                          # Frames 121 - 180 (Cockpit Sanctuary)
-├── index.html                               # Semantic HTML5 architecture & UI overlays
-├── style.css                                # Custom CSS design system, typography & glassmorphism
-├── main.js                                  # GSAP timeline, canvas renderer, configurator & audio engine
-├── package.json                             # Scripts & project dependencies
-├── vite.config.js                           # Vite build configuration
-└── .gitignore                               # Standard git ignore rules (node_modules, dist)
+│       ├── aureon_hero_banner.jpg             # Flagship GitHub hero preview banner
+│       ├── aureon_phases_showcase.jpg         # 3-Phase panoramic showcase
+│       ├── aureon_configurator_preview.jpg    # Photorealistic Atelier studio preview
+│       ├── aureon_workflow_architecture.png   # Interaction workflow pipeline diagram
+│       ├── aureon_framework_diagram.png       # Framework architecture stack diagram
+│       ├── aureon_side_profile.webp           # High-resolution car side profile render
+│       ├── phase1/                            # Frames 001 - 060 (Genesis Exterior 360)
+│       ├── phase2/                            # Frames 061 - 120 (Chassis & Powertrain X-Ray)
+│       └── phase3/                            # Frames 121 - 180 (Cockpit Sanctuary)
+├── index.html                                 # Semantic HTML5 architecture & UI overlays
+├── style.css                                  # Custom CSS design system, typography & glassmorphism
+├── main.js                                    # GSAP timeline, canvas renderer, configurator & audio engine
+├── package.json                               # Scripts & project dependencies
+├── vite.config.js                             # Vite build configuration
+└── .gitignore                                 # Standard git ignore rules (node_modules, dist)
 ```
 
 ---
