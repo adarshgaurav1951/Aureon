@@ -1,16 +1,59 @@
-# AUREON // Hyper Sports Car Experience
+<p align="center">
+  <img src="public/assets/aureon_hero_banner.jpg" alt="Aureon Hyper Sports Car Experience" width="100%" />
+</p>
 
-> High-end brutalist motorsport web experience powered by 180 volumetric canvas frames, GSAP ScrollTrigger sequence scrubbing, Lenis momentum scrolling, interactive chassis configuration, and real-time audio telemetry.
+<h1 align="center">AUREON // Hyper Sports Car Experience</h1>
+
+<p align="center">
+  <b>The Architecture of Speed & Light. Dedicated to the Relentless Perfection of Combustion, Hybrid Propulsion, and Carbo-Titanium Matrix.</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Vite-6.4-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/GSAP-3.12-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP" />
+  <img src="https://img.shields.io/badge/Lenis-Smooth_Scroll-F59E0B?style=for-the-badge" alt="Lenis" />
+  <img src="https://img.shields.io/badge/Web_Audio-Procedural_Synth-00F0FF?style=for-the-badge" alt="Web Audio API" />
+  <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+</p>
 
 ---
 
-## 🏎️ Overview
+## 🏎️ Interactive Visual Showcase
 
-**Aureon** is an interactive, cinematic 3D web experience showcasing the pinnacle of automotive engineering:
-- **180-Frame Volumetric Scrubbing**: Smooth canvas-based frame sequencing across 3 distinct phases (Genesis, Core X-Ray, and Cockpit Sanctuary).
-- **Interactive Atelier Configurator**: Real-time CSS metallurgical finish filtering (Champagne Gold, Liquid Silver, Obsidian Carbon, Motorsport Titanium) on the photorealistic side profile, with dynamic aerodynamic and interior appointment selections.
-- **Dynamic Telemetry & Audio Synthesizer**: Web Audio API engine acoustic synthesizer, live HUD telemetry readouts, radar ping hotspots, and interactive technical blueprint modals.
+### 1. Volumetric Storytelling Phases (180 Canvas Frames)
+The car dynamically rotates and deconstructs across 180 volumetric frames synchronized with momentum scrolling:
+
+<p align="center">
+  <img src="public/assets/aureon_phases_showcase.jpg" alt="Phase 1 Genesis, Phase 2 Core X-Ray, Phase 3 Cockpit Sanctuary" width="100%" />
+</p>
+
+<p align="center">
+  <b>Phase 01 // The Genesis</b> (Volumetric 360 Exterior) &nbsp;&bull;&nbsp; 
+  <b>Phase 02 // The Core</b> (Powertrain & Monocoque X-Ray) &nbsp;&bull;&nbsp; 
+  <b>Phase 03 // The Sanctuary</b> (Driver Sanctuary Cockpit)
+</p>
+
+---
+
+### 2. Bespoke Atelier Studio Configurator
+Authentic photorealistic side-profile visualization with real-time CSS shaders for metallurgical finishes and aerodynamic trim options:
+
+<p align="center">
+  <img src="public/assets/aureon_configurator_preview.jpg" alt="Aureon Photorealistic Side Profile Atelier" width="100%" />
+</p>
+
+- **01 // Exterior Metallurgical Finish**: Real-time shader adjustments for *Champagne Gold*, *Liquid Silver Chrome*, *Obsidian Matte*, and *Motorsport Titanium*.
+- **02 // Aerodynamic Architecture**: Dynamic toggle between *Sprint Circuit High Downforce* (1,200 kg @ 300 km/h) and *Speedtail GT Maximum Velocity* (440 km/h).
+- **03 // Cockpit Sanctuary Appointment**: Bespoke interior trims (*Saddle Cognac*, *Obsidian Race Alcantara*, *Arctic White Silk*).
+
+---
+
+## ⚡ Key Highlights
+
+- **180-Frame Volumetric Scrubbing**: Canvas-rendered sequence with zero lag using pre-buffered high-efficiency WebP frames.
+- **Dynamic Telemetry & Audio Synthesizer**: Procedural Web Audio API engine acoustic synthesizer (interactive acceleration sound), live HUD telemetry readouts, radar ping hotspots, and interactive technical blueprint modals.
 - **Track Simulator / Auto-Drive**: Autonomous cruise simulation looping through the car's volumetric sequence with real-time speed adjustments.
+- **Luxury Brutalist Design System**: Deep black obsidian backgrounds (`#030406`), solar titanium gold accents (`#F59E0B`, `#FBBF24`), liquid chrome gradients, and glassmorphism.
 
 ---
 
@@ -84,16 +127,19 @@ npm run preview
 Aureon/
 ├── public/
 │   └── assets/
-│       ├── aureon_side_profile.webp   # Photorealistic car side profile render
-│       ├── phase1/                    # Frames 001 - 060 (Genesis Exterior 360)
-│       ├── phase2/                    # Frames 061 - 120 (Chassis & Powertrain X-Ray)
-│       └── phase3/                    # Frames 121 - 180 (Cockpit Sanctuary)
-├── index.html                         # Semantic HTML5 architecture & UI overlays
-├── style.css                          # Custom CSS design system, typography & glassmorphism
-├── main.js                            # GSAP timeline, canvas renderer, configurator & audio engine
-├── package.json                       # Scripts & project dependencies
-├── vite.config.js                     # Vite build configuration
-└── .gitignore                         # Standard git ignore rules (node_modules, dist)
+│       ├── aureon_hero_banner.jpg           # Flagship GitHub hero preview banner
+│       ├── aureon_phases_showcase.jpg       # 3-Phase panoramic showcase
+│       ├── aureon_configurator_preview.jpg  # Photorealistic Atelier studio preview
+│       ├── aureon_side_profile.webp         # High-resolution car side profile render
+│       ├── phase1/                          # Frames 001 - 060 (Genesis Exterior 360)
+│       ├── phase2/                          # Frames 061 - 120 (Chassis & Powertrain X-Ray)
+│       └── phase3/                          # Frames 121 - 180 (Cockpit Sanctuary)
+├── index.html                               # Semantic HTML5 architecture & UI overlays
+├── style.css                                # Custom CSS design system, typography & glassmorphism
+├── main.js                                  # GSAP timeline, canvas renderer, configurator & audio engine
+├── package.json                             # Scripts & project dependencies
+├── vite.config.js                           # Vite build configuration
+└── .gitignore                               # Standard git ignore rules (node_modules, dist)
 ```
 
 ---
@@ -119,4 +165,4 @@ git push origin main
 ---
 
 ## 📄 License
-Private bespoke release © 2026 AUREON Automotive Labs. All rights reserved.
+Private bespoke release &copy; 2026 AUREON Automotive Labs. All rights reserved.
