@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AUREON // Hyper Sports Car — The Architecture of Speed & Light</title>
+  <meta name="description" content="AUREON — Ultra-performance brutalist hyper sports car in champagne gold titanium and liquid chrome. 1,650 BHP twin-turbo hybrid propulsion, carbo-titanium monocoque, and autonomous cockpit sanctuary." />
+  
+  <!-- Favicon in Aureon Gold & Chrome -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.88em' font-size='85' font-weight='bold' fill='%23F59E0B'>AU</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=Cinzel:wght@600;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="is-loading">
+  <!-- Subtle Non-Washing Film Grain Overlay -->
+  <div id="film-grain" class="film-grain" aria-hidden="true"></div>
+
+  <!-- Custom Magnetic Cursor (Aureon Gold & Chrome) -->
+  <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Preloader Screen -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-badge">
+        <span class="mono-tag">AUREON AUTOMOTIVE LABS</span>
+        <span class="mono-status">SYS_INITIALIZE // RACE_SPEC_01</span>
+      </div>
+
+      <div class="preloader-logo">
+        <span class="glyph">AU</span>
+        <span class="brand">AUREON</span>
+      </div>
+
+      <div class="preloader-terminal">
+        <div class="terminal-line" id="term-line-1">> KERNEL: AUREON_SPORT_OS v4.19 INITIATING...</div>
+        <div class="terminal-line" id="term-line-2">> CALIBRATING CARBO-TITANIUM MONOCOQUE & HYPER DYNAMICS</div>
+        <div class="terminal-line" id="term-line-3">> BUFFERING 180 HIGH-DEF VOLUMETRIC FRAMES...</div>
+      </div>
+
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+
+      <div class="preloader-metrics">
+        <span id="preloader-pct" class="pct">00%</span>
+        <span id="preloader-msg" class="msg">IGNITING TWIN-TURBO MATRIX...</span>
+        <span id="preloader-frames" class="frames">[ 000 / 180 ]</span>
+      </div>
+
+      <button id="btn-skip-preloader" class="preloader-skip-btn">
+        ENTER EXPERIENCE &rarr;
+      </button>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="aether-nav">
+    <div class="nav-left">
+      <a href="#" class="nav-logo" id="nav-brand-logo">
+        <span class="nav-glyph">AU</span>
+        <div class="nav-logo-text">
+          <span class="nav-brand-name">AUREON</span>
+          <span class="nav-brand-sub">HYPER SPORTS CAR</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <nav class="nav-links-menu" aria-label="Main Navigation">
+        <a href="#section-genesis" class="nav-link-item" data-magnetic>01. GENESIS</a>
+        <a href="#section-core" class="nav-link-item" data-magnetic>02. THE CORE</a>
+        <a href="#section-sanctuary" class="nav-link-item" data-magnetic>03. COCKPIT</a>
+        <a href="#section-configurator" class="nav-link-item" data-magnetic>04. ATELIER</a>
+        <a href="#section-powertrain" class="nav-link-item" data-magnetic>05. ENGINEERING</a>
+        <a href="#section-benchmarks" class="nav-link-item" data-magnetic>06. TELEMETRY</a>
+      </nav>
+    </div>
+
+    <div class="nav-right">
+      <button id="btn-autodrive-toggle" class="nav-btn nav-btn-autodrive" aria-label="Toggle Auto-Drive Mode" data-magnetic>
+        <div class="autodrive-pulse"></div>
+        <span class="autodrive-label">TRACK SIM: <b id="autodrive-state-text">OFF</b></span>
+      </button>
+
+      <button id="btn-audio-toggle" class="nav-btn nav-btn-audio" aria-label="Toggle Acoustic Synthesizer">
+        <div class="audio-bars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span class="audio-label">EXHAUST SYNTH: <b id="audio-state-text">MUTED</b></span>
+      </button>
+
+      <button id="btn-nav-blueprint" class="nav-btn nav-btn-outline" data-magnetic>
+        <span>SPECS</span>
+      </button>
+
+      <button id="btn-nav-reserve" class="nav-btn nav-btn-primary" data-magnetic>
+        <span>COMMISSION</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Canvas Container (stays fixed inset: 0) -->
+  <div id="canvas-container" class="canvas-container">
+    <canvas id="car-canvas"></canvas>
+
+    <!-- Phase 2 Hotspots Overlay Layer (synchronized to canvas coordinates) -->
+    <div id="hotspots-overlay" class="hotspots-overlay">
+      <!-- Hotspot 1: 1,650 BHP Twin-Turbo Hybrid Core -->
+      <div class="hotspot" id="hotspot-solid-state" data-frame-start="70" data-frame-end="110" style="--x: 52%; --y: 62%;">
+        <button class="hotspot-trigger" aria-label="Powertrain Core details" data-magnetic>
+          <div class="hotspot-ping"></div>
+          <div class="hotspot-core">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" stroke-width="1.5"/>
+              <path d="M12 6v12M6 12h12" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="hotspot-dot-label">01 // POWERTRAIN CORE</span>
+        </button>
+        <div class="hotspot-card glass-panel">
+          <div class="card-header">
+            <span class="card-badge">[ 1,650 BHP HYBRID ]</span>
+            <span class="card-metric">440 KM/H TOP SPEED</span>
+          </div>
+          <p class="card-desc">Mid-mounted twin-turbo V16 engine coupled with high-output axial flux kinetic boost. Inconel exhaust valving with 11,500 RPM redline.</p>
+          <div class="card-stats">
+            <div class="stat-col">
+              <span class="stat-val">1,650 BHP</span>
+              <span class="stat-lbl">PEAK OUTPUT</span>
+            </div>
+            <div class="stat-col">
+              <span class="stat-val">1,820 NM</span>
+              <span class="stat-lbl">TORQUE</span>
+            </div>
+            <div class="stat-col">
+              <span class="stat-val">11,500</span>
+              <span class="stat-lbl">REDLINE RPM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotspot 2: 8-Speed Sequential Race Transmission -->
+      <div class="hotspot" id="hotspot-dual-induction" data-frame-start="72" data-frame-end="112" style="--x: 28%; --y: 50%;">
+        <button class="hotspot-trigger" aria-label="Sequential Gearbox details" data-magnetic>
+          <div class="hotspot-ping"></div>
+          <div class="hotspot-core">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="hotspot-dot-label">02 // TRANSMISSION</span>
+        </button>
+        <div class="hotspot-card glass-panel">
+          <div class="card-header">
+            <span class="card-badge">[ DUAL-CLUTCH RACE ]</span>
+            <span class="card-metric">1.7S TO 100KM/H</span>
+          </div>
+          <p class="card-desc">Seamless-shift 8-speed dual-clutch transmission with mechanical torque-vectoring electronic differential and launch control.</p>
+          <div class="card-stats">
+            <div class="stat-col">
+              <span class="stat-val">8ms</span>
+              <span class="stat-lbl">SHIFT TIME</span>
+            </div>
+            <div class="stat-col">
+              <span class="stat-val">AWD</span>
+              <span class="stat-lbl">VECTORING</span>
+            </div>
+            <div class="stat-col">
+              <span class="stat-val">1.7s</span>
+              <span class="stat-lbl">0-100 KM/H</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotspot 3: Carbo-Titanium Monocoque Chassis -->
+      <div class="hotspot" id="hotspot-bio-mimetic" data-frame-start="75" data-frame-end="115" style="--x: 74%; --y: 42%;">
+        <button class="hotspot-trigger" aria-label="Carbo-Titanium Chassis details" data-magnetic>
+          <div class="hotspot-ping"></div>
+          <div class="hotspot-core">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <span class="hotspot-dot-label">03 // CHASSIS</span>
+        </button>
+        <div class="hotspot-card glass-panel">
+          <div class="card-header">
+            <span class="card-badge">[ CARBO-TITANIUM ]</span>
+            <span class="card-metric">FORMULA CHASSIS</span>
+          </div>
+          <p class="card-desc">Graphene-infused carbo-titanium weave engineered for extreme aerodynamic downforce and Formula 1 safety standards.</p>
+          <div class="card-stats">
+            <div class="stat-col">
+              <span class="stat-val">68,000 NM/°</span>
+              <span class="stat-lbl">TORSION STIFF</span>
+            </div>
+            <div class="stat-col">
+              <span class="stat-val">1,420 KG</span>
+              <span class="stat-lbl">DRY MASS</span>
+            </div>
+            <div class="stat-col">
+              <span class="stat-val">0.198 CD</span>
+              <span class="stat-lbl">ACTIVE AERO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time HUD Telemetry Overlays -->
+  <aside class="hud-telemetry hud-left" aria-hidden="true">
+    <div class="hud-box glass-panel">
+      <div class="hud-row">
+        <span class="hud-key">FRAME_BUFFER</span>
+        <span class="hud-val text-gold" id="hud-frame-num">FRAME [001/180]</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-key">SCROLL_SCRUB</span>
+        <span class="hud-val" id="hud-scrub-val">0.00%</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-key">DRIVE_MODE</span>
+        <span class="hud-val text-gold" id="hud-drive-status">TRACK MODE</span>
+      </div>
+      <div class="hud-sparkline">
+        <div class="spark-bar" style="height: 50%"></div>
+        <div class="spark-bar" style="height: 75%"></div>
+        <div class="spark-bar" style="height: 100%"></div>
+        <div class="spark-bar" style="height: 90%"></div>
+        <div class="spark-bar" style="height: 65%"></div>
+        <div class="spark-bar" style="height: 85%"></div>
+        <div class="spark-bar" style="height: 100%"></div>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="hud-telemetry hud-right" aria-hidden="true">
+    <div class="hud-box glass-panel">
+      <div class="hud-phase-stepper">
+        <div class="phase-step active" id="step-1" data-phase="1">
+          <span class="step-num">01</span>
+          <span class="step-title">GENESIS</span>
+        </div>
+        <div class="phase-connector"></div>
+        <div class="phase-step" id="step-2" data-phase="2">
+          <span class="step-num">02</span>
+          <span class="step-title">THE CORE</span>
+        </div>
+        <div class="phase-connector"></div>
+        <div class="phase-step" id="step-3" data-phase="3">
+          <span class="step-num">03</span>
+          <span class="step-title">COCKPIT</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Scrollable Storytelling Architecture -->
+  <main id="scroll-container" class="scroll-container">
+
+    <!-- The 3 Cinematic Storytelling Phases scrubbed via Canvas -->
+    <div id="story-track" class="story-track">
+      <!-- ==============================================
+           SECTION 1: THE GENESIS (Hero)
+           ============================================== -->
+      <section id="section-genesis" class="story-section section-genesis" data-phase="1">
+        <div class="section-inner hero-inner">
+          <div class="hero-brand-wrap">
+            <div class="hero-eyebrow">
+              <span class="mono-hash">// HYPER SPORTS CAR SPECIFICATION 2026</span>
+              <span class="mono-glitch">BESPOKE CHASSIS [01/50]</span>
+            </div>
+            
+            <h1 class="hero-title" id="hero-title-aether" data-adaptive-weight>
+              AUREON
+            </h1>
+
+            <p class="hero-subtitle">THE ARCHITECTURE OF SPEED & LIGHT.</p>
+          </div>
+
+          <div class="hero-spec-strip glass-panel">
+            <div class="strip-item">
+              <span class="strip-num">1,650</span>
+              <span class="strip-lbl">BRAKE HORSEPOWER</span>
+            </div>
+            <div class="strip-divider"></div>
+            <div class="strip-item">
+              <span class="strip-num">1.7S</span>
+              <span class="strip-lbl">0-100 KM/H</span>
+            </div>
+            <div class="strip-divider"></div>
+            <div class="strip-item">
+              <span class="strip-num">440</span>
+              <span class="strip-lbl">KM/H TOP VELOCITY</span>
+            </div>
+            <div class="strip-divider"></div>
+            <div class="strip-item">
+              <span class="strip-num">11,500</span>
+              <span class="strip-lbl">PEAK RPM</span>
+            </div>
+          </div>
+
+          <!-- Section 1 CTA -->
+          <div class="hero-cta-wrap">
+            <button id="cta-initiate-genesis" class="cta-genesis-btn" data-magnetic>
+              <span class="pulse-ring"></span>
+              <span class="btn-text">[ INITIATE GENESIS ]</span>
+              <span class="btn-subtext">SCROLL TO COMMENCE VOLUMETRIC SCAN</span>
+              <svg class="chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M7 10l5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <button id="cta-track-run" class="cta-track-btn" data-magnetic>
+              <span class="track-pulse"></span>
+              <span class="btn-text">[ SIMULATE TRACK RUN ]</span>
+              <span class="btn-subtext">AUTO-DRIVE & KINETIC WHEEL MOTION</span>
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6,4 20,12 6,20"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 2: THE ENERGY PULSE (Technical)
+           ============================================== -->
+      <section id="section-core" class="story-section section-core" data-phase="2">
+        <div class="section-inner core-inner">
+          <div class="core-header-wrap">
+            <div class="section-label-chip">
+              <span class="chip-dot"></span>
+              <span>PHASE 02 // VOLUMETRIC RACE X-RAY</span>
+            </div>
+            <h2 class="section-title">01. THE CORE</h2>
+            <p class="section-lead">
+              Optical deconstruction of the twin-turbo hybrid architecture. Uncompromising combustion power interwoven with axial flux torque vectoring and race-derived aero tunnels.
+            </p>
+          </div>
+
+          <!-- Technical Telemetry HUD Sidebar -->
+          <div class="core-hud-panel glass-panel">
+            <div class="hud-panel-title">
+              <span class="icon-pulse"></span>
+              <span>VOLUMETRIC ENGINE & CHASSIS TELEMETRY</span>
+            </div>
+            
+            <div class="hud-spec-list">
+              <div class="hud-spec-item" data-hotspot-target="solid-state">
+                <div class="spec-head">
+                  <span class="spec-id">[ TWIN-TURBO V16 ]</span>
+                  <span class="spec-status text-gold">ACTIVE 11,500 RPM</span>
+                </div>
+                <div class="spec-val">1,650 BHP // Titanium Inconel Exhaust</div>
+                <div class="spec-progress-track">
+                  <div class="spec-progress-fill" style="width: 100%;"></div>
+                </div>
+              </div>
+
+              <div class="hud-spec-item" data-hotspot-target="dual-induction">
+                <div class="spec-head">
+                  <span class="spec-id">[ 8-SPEED RACE CLUTCH ]</span>
+                  <span class="spec-status text-cyan">8ms SHIFT TIME</span>
+                </div>
+                <div class="spec-val">1.7s to 100km/h // Electronic Torque Vectoring</div>
+                <div class="spec-progress-track">
+                  <div class="spec-progress-fill" style="width: 98%;"></div>
+                </div>
+              </div>
+
+              <div class="hud-spec-item" data-hotspot-target="bio-mimetic">
+                <div class="spec-head">
+                  <span class="spec-id">[ CARBO-TITANIUM ]</span>
+                  <span class="spec-status text-emerald">RIGIDITY: OPTIMAL</span>
+                </div>
+                <div class="spec-val">68,000 Nm/° Rigidity // 0.198 Cd Downforce</div>
+                <div class="spec-progress-track">
+                  <div class="spec-progress-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hud-panel-footer">
+              <button id="cta-view-blueprint" class="blueprint-btn" data-magnetic>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5"/>
+                  <line x1="3" y1="9" x2="21" y2="9" stroke-width="1.5"/>
+                  <line x1="9" y1="21" x2="9" y2="9" stroke-width="1.5"/>
+                </svg>
+                <span>VIEW TECHNICAL BLUEPRINT</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 3: THE SANCTUARY (Interior)
+           ============================================== -->
+      <section id="section-sanctuary" class="story-section section-sanctuary" data-phase="3">
+        <div class="section-inner sanctuary-inner">
+          <div class="sanctuary-header-wrap">
+            <div class="section-label-chip">
+              <span class="chip-dot chip-gold"></span>
+              <span>PHASE 03 // DRIVER SANCTUARY</span>
+            </div>
+
+            <h2 class="section-title text-mercury">THE FUTURE OF SPEED</h2>
+            
+            <blockquote class="sanctuary-quote">
+              "No compromise. No noise. Pure direction and velocity."
+            </blockquote>
+
+            <p class="sanctuary-body">
+              Tailored in champagne gold titanium accents, liquid-polished aluminium switches, and matte obsidian carbon weave. The Aureon cockpit fuses aerospace telemetry with race-bred ergonomic harmony and -48dB active harmonic acoustic tuning.
+            </p>
+
+            <div class="sanctuary-pillars">
+              <div class="pillar glass-panel">
+                <span class="pillar-num">01</span>
+                <h4>FORMULA ERGONOMICS</h4>
+                <p>Carbon bucket seats integrated directly into the monocoque.</p>
+              </div>
+              <div class="pillar glass-panel">
+                <span class="pillar-num">02</span>
+                <h4>HARMONIC TUNING</h4>
+                <p>Active acoustic channels transmitting pure V16 mechanical harmonics.</p>
+              </div>
+              <div class="pillar glass-panel">
+                <span class="pillar-num">03</span>
+                <h4>AEROSPACE GLASS</h4>
+                <p>Ultra-thin chemically toughened canopy with 100% UV & glare rejection.</p>
+              </div>
+            </div>
+
+            <div class="sanctuary-cta-wrap">
+              <button id="cta-secure-allocation" class="primary-allocation-btn" data-magnetic>
+                <span class="btn-glare"></span>
+                <span class="btn-main-label">[ SECURE ALLOCATION ]</span>
+                <span class="btn-sub-label">AUREON HYPER SPORTS CAR // CHASSIS ALLOCATION 2026</span>
+              </button>
+
+              <div class="allocation-fineprint">
+                <span>EXCLUSIVE GLOBAL PRODUCTION: STRICTLY 50 CHASSIS</span>
+                <span class="dot-separator">•</span>
+                <span>ESTIMATED DELIVERY: Q4 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================================
+         SECTION 4: BESPOKE ATELIER // INTERACTIVE CONFIGURATOR
+         ========================================================================== -->
+    <section id="section-configurator" class="editorial-section section-configurator">
+      <div class="editorial-container">
+        <div class="editorial-header">
+          <div class="section-label-chip">
+            <span class="chip-dot chip-gold"></span>
+            <span>04 // BESPOKE SPECIFICATION</span>
+          </div>
+          <h2 class="editorial-title">CURATE YOUR AUREON</h2>
+          <p class="editorial-subtitle">
+            Tailor the exterior metallurgical finish, aero package, and cockpit architecture to your individual racing pedigree.
+          </p>
+        </div>
+
+        <div class="configurator-workspace glass-panel">
+          <div class="config-preview-pane">
+            <div class="config-visual-stage" id="config-visual-stage">
+              <div class="stage-chassis-glow" id="stage-chassis-glow"></div>
+              <div class="stage-badge-wrap">
+                <span class="stage-chassis-id">CHASSIS SPEC: <b id="cfg-spec-code">AU-2026-CHAMPAGNE-GOLD</b></span>
+                <span class="stage-chassis-status" id="cfg-motion-status">ARCHITECTURE: MONOCOQUE X-RAY</span>
+              </div>
+
+              <!-- PHOTO REALISTIC HYPERCAR ARCHITECTURE (AUTHENTIC REAL IMAGE) -->
+              <div class="stage-real-car-wrap" id="stage-real-car-wrap">
+                <img src="/assets/aureon_side_profile.webp" alt="Aureon Hyper Sports Car Side Profile" class="real-car-base-img" id="real-car-base-img" />
+              </div>
+            </div>
+
+            <!-- Dynamic Live Spec Metric Strip -->
+            <div class="config-live-stats">
+              <div class="live-stat-card">
+                <span class="live-stat-lbl">CURB MASS</span>
+                <span class="live-stat-val" id="cfg-stat-weight">1,420 KG</span>
+              </div>
+              <div class="live-stat-card">
+                <span class="live-stat-lbl">PEAK DOWNFORCE</span>
+                <span class="live-stat-val" id="cfg-stat-downforce">1,200 KG @ 300</span>
+              </div>
+              <div class="live-stat-card">
+                <span class="live-stat-lbl">DRAG COEFFICIENT</span>
+                <span class="live-stat-val" id="cfg-stat-drag">0.198 Cd</span>
+              </div>
+              <div class="live-stat-card">
+                <span class="live-stat-lbl">DELIVERY WINDOW</span>
+                <span class="live-stat-val" id="cfg-stat-delivery">Q4 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Pane -->
+          <div class="config-controls-pane">
+            <!-- Exterior Paint Finishes -->
+            <div class="config-group">
+              <span class="config-group-title">01 // EXTERIOR METALLURGICAL FINISH</span>
+              <div class="config-options-grid">
+                <button class="cfg-color-btn active" data-color="gold" data-magnetic>
+                  <span class="color-swatch swatch-gold"></span>
+                  <div class="swatch-info">
+                    <b>Champagne Gold</b>
+                    <span>Polished Titanium Weave</span>
+                  </div>
+                </button>
+                <button class="cfg-color-btn" data-color="silver" data-magnetic>
+                  <span class="color-swatch swatch-silver"></span>
+                  <div class="swatch-info">
+                    <b>Liquid Silver Chrome</b>
+                    <span>Raw Mirror Metal</span>
+                  </div>
+                </button>
+                <button class="cfg-color-btn" data-color="obsidian" data-magnetic>
+                  <span class="color-swatch swatch-obsidian"></span>
+                  <div class="swatch-info">
+                    <b>Obsidian Matte</b>
+                    <span>Exposed Carbo-Graphene</span>
+                  </div>
+                </button>
+                <button class="cfg-color-btn" data-color="titanium" data-magnetic>
+                  <span class="color-swatch swatch-titanium"></span>
+                  <div class="swatch-info">
+                    <b>Motorsport Titanium</b>
+                    <span>Satin Brushed Finish</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Aero Package -->
+            <div class="config-group">
+              <span class="config-group-title">02 // AERODYNAMIC ARCHITECTURE</span>
+              <div class="config-options-dual">
+                <button class="cfg-aero-btn active" data-aero="track" data-magnetic>
+                  <b>SPRINT CIRCUIT // HIGH DOWNFORCE</b>
+                  <span>Twin Hydraulic Active Wing + Splitters (1,200kg Downforce)</span>
+                </button>
+                <button class="cfg-aero-btn" data-aero="speedtail" data-magnetic>
+                  <b>SPEEDTAIL GT // MAXIMUM VELOCITY</b>
+                  <span>Low Drag Active Streamline Diffusers (440 km/h Top Velocity)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Interior Theme -->
+            <div class="config-group">
+              <span class="config-group-title">03 // COCKPIT SANCTUARY APPOINTMENT</span>
+              <div class="config-options-grid">
+                <button class="cfg-interior-btn active" data-interior="saddle" data-magnetic>
+                  <b>Saddle Cognac</b>
+                  <span>Gold Titanium Stitch</span>
+                </button>
+                <button class="cfg-interior-btn" data-interior="alcantara" data-magnetic>
+                  <b>Obsidian Race Alcantara</b>
+                  <span>Cyan Precision Accent</span>
+                </button>
+                <button class="cfg-interior-btn" data-interior="arctic" data-magnetic>
+                  <b>Arctic White Silk</b>
+                  <span>Polished Aluminium Trim</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="config-action-row">
+              <button id="btn-apply-config" class="btn-submit-alloc" data-magnetic>
+                <span>APPLY SPECIFICATION TO ALLOCATION &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: DEEP ENGINEERING // THE ANATOMY OF VELOCITY
+         ========================================================================== -->
+    <section id="section-powertrain" class="editorial-section section-powertrain">
+      <div class="editorial-container">
+        <div class="editorial-header">
+          <div class="section-label-chip">
+            <span class="chip-dot chip-gold"></span>
+            <span>05 // MOTORSPORT GENETICS</span>
+          </div>
+          <h2 class="editorial-title">THE ANATOMY OF VELOCITY</h2>
+          <p class="editorial-subtitle">
+            Engineered without compromise. Each subsystem pushes beyond the theoretical boundaries of physics, crafted for uncompromising speed.
+          </p>
+        </div>
+
+        <div class="engineering-matrix-grid">
+          <div class="eng-card glass-panel" data-magnetic>
+            <div class="eng-card-num">01</div>
+            <div class="eng-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="9" stroke-width="1.5"/>
+                <path d="M12 3v18M3 12h18" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 class="eng-card-title">V16 TWIN-TURBOCHARGED MATRIX</h3>
+            <p class="eng-card-desc">
+              Bespoke 9.0L mid-mounted 90° V16 power plant with dual ball-bearing turbochargers and dry sump multi-stage scavenge pumps. Revs freely to an astonishing 11,500 RPM with pneumatic titanium valves.
+            </p>
+            <div class="eng-spec-pill">1,650 BHP // 1,820 NM TORQUE</div>
+          </div>
+
+          <div class="eng-card glass-panel" data-magnetic>
+            <div class="eng-card-num">02</div>
+            <div class="eng-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 class="eng-card-title">CARBO-TITANIUM MONOCOQUE</h3>
+            <p class="eng-card-desc">
+              Forged with autoclave-cured high-modulus carbon fiber interlaced with titanium filament thread. Achieves 68,000 Nm per degree of torsional rigidity, surpassing FIA GT3 race car crash test metrics.
+            </p>
+            <div class="eng-spec-pill">68,000 NM/DEGREE RIGIDITY</div>
+          </div>
+
+          <div class="eng-card glass-panel" data-magnetic>
+            <div class="eng-card-num">03</div>
+            <div class="eng-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 14l6-6 4 4 6-6M4 20h16" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 class="eng-card-title">VENTURI GROUND-EFFECT AERO</h3>
+            <p class="eng-card-desc">
+              Twin underfloor venturi tunnels generate suction ground-effect downforce without parasite drag. An active hydraulic dual rear wing trims pitch angles in milliseconds to balance 1,200 kg of downforce.
+            </p>
+            <div class="eng-spec-pill">1,200 KG DOWNFORCE @ 300 KM/H</div>
+          </div>
+
+          <div class="eng-card glass-panel" data-magnetic>
+            <div class="eng-card-num">04</div>
+            <div class="eng-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" stroke-width="1.5"/>
+                <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3 class="eng-card-title">CARBON-CERAMIC-SILICON BRAKES</h3>
+            <p class="eng-card-desc">
+              430mm front / 410mm rear ventilated Carbon-Silicon-Carbide (CSiC) floating discs with 10-piston monobloc titanium calipers. Delivers fade-free stopping deceleration from 300 to 0 km/h in 6.4 seconds.
+            </p>
+            <div class="eng-spec-pill">100-0 KM/H IN 26 METERS</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: PERFORMANCE BENCHMARK COMPARISON
+         ========================================================================== -->
+    <section id="section-benchmarks" class="editorial-section section-benchmarks">
+      <div class="editorial-container">
+        <div class="editorial-header">
+          <div class="section-label-chip">
+            <span class="chip-dot chip-gold"></span>
+            <span>06 // PERFORMANCE VERIFICATION</span>
+          </div>
+          <h2 class="editorial-title">UNTOUCHED AT THE APEX</h2>
+          <p class="editorial-subtitle">
+            Verified race telemetry comparing Aureon against the world's most elite production hypercars.
+          </p>
+        </div>
+
+        <div class="benchmark-table-wrap glass-panel">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>BENCHMARK METRIC</th>
+                <th class="col-aureon">AUREON HYPERCAR</th>
+                <th>CONVENTIONAL HYPER GT</th>
+                <th>TRACK-FOCUSED COMPETITOR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name"><b>POWER-TO-WEIGHT RATIO</b></td>
+                <td class="col-aureon val-highlight">1.16 BHP / KG</td>
+                <td>0.81 BHP / KG</td>
+                <td>1.08 BHP / KG</td>
+              </tr>
+              <tr>
+                <td class="metric-name"><b>0-100 KM/H (0-62 MPH)</b></td>
+                <td class="col-aureon val-highlight">1.70 SECONDS</td>
+                <td>2.40 SECONDS</td>
+                <td>2.10 SECONDS</td>
+              </tr>
+              <tr>
+                <td class="metric-name"><b>0-300 KM/H (0-186 MPH)</b></td>
+                <td class="col-aureon val-highlight">8.80 SECONDS</td>
+                <td>12.50 SECONDS</td>
+                <td>10.20 SECONDS</td>
+              </tr>
+              <tr>
+                <td class="metric-name"><b>TOP VELOCITY</b></td>
+                <td class="col-aureon val-highlight">440 KM/H (273 MPH)</td>
+                <td>410 KM/H (255 MPH)</td>
+                <td>425 KM/H (264 MPH)</td>
+              </tr>
+              <tr>
+                <td class="metric-name"><b>MAX LATERAL ACCELERATION</b></td>
+                <td class="col-aureon val-highlight">2.40 G SUSTAINED</td>
+                <td>1.65 G</td>
+                <td>1.95 G</td>
+              </tr>
+              <tr>
+                <td class="metric-name"><b>TORSIONAL RIGIDITY</b></td>
+                <td class="col-aureon val-highlight">68,000 NM/DEGREE</td>
+                <td>45,000 NM/DEGREE</td>
+                <td>52,000 NM/DEGREE</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: BESPOKE OWNERSHIP // PRIVILEGE OF 50
+         ========================================================================== -->
+    <section id="section-ownership" class="editorial-section section-ownership">
+      <div class="editorial-container">
+        <div class="editorial-header">
+          <div class="section-label-chip">
+            <span class="chip-dot chip-gold"></span>
+            <span>07 // CONCIERGE & PRIVILEGE</span>
+          </div>
+          <h2 class="editorial-title">THE PRIVILEGE OF FIFTY</h2>
+          <p class="editorial-subtitle">
+            Ownership extends far beyond the automobile. Each Aureon patron gains lifetime access to an elite motorsport ecosystem.
+          </p>
+        </div>
+
+        <div class="ownership-cards-grid">
+          <div class="owner-card glass-panel" data-magnetic>
+            <div class="owner-card-badge">GENEVA ATELIER</div>
+            <h3>HANDOVER CEREMONY</h3>
+            <p>
+              Patrons are hosted at our Lake Geneva facility for a 3-day bespoke fitting session: personal carbon seat molding, telemetry customization, and ceremonial track shakedown with factory test pilots.
+            </p>
+            <div class="owner-card-footer">
+              <span class="text-gold">PRIVATE AIR TRANSFERS INCLUDED</span>
+            </div>
+          </div>
+
+          <div class="owner-card glass-panel" data-magnetic>
+            <div class="owner-card-badge">GLOBAL NETWORK</div>
+            <h3>FLYING DOCTOR MECHANICAL SERVICE</h3>
+            <p>
+              Factory certified Aureon race engineers are on standby 24/7/365 worldwide. Dispatched via private jet within 24 hours to conduct maintenance or race track telemetry diagnostics anywhere on Earth.
+            </p>
+            <div class="owner-card-footer">
+              <span class="text-gold">24-HOUR WORLDWIDE DISPATCH</span>
+            </div>
+          </div>
+
+          <div class="owner-card glass-panel" data-magnetic>
+            <div class="owner-card-badge">SCUDERIA ACCESS</div>
+            <h3>EXCLUSIVE CIRCUIT DAYS</h3>
+            <p>
+              Guaranteed entry into closed-circuit private track experiences at Spa-Francorchamps, Nürburgring Nordschleife, Silverstone, and Laguna Seca with full factory pit crew support and telemetry analysis.
+            </p>
+            <div class="owner-card-footer">
+              <span class="text-gold">FULL PIT CREW & SLICKS INCLUDED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: MOTORSPORT PRESS & CRITICAL ACCLAIM
+         ========================================================================== -->
+    <section id="section-press" class="editorial-section section-press">
+      <div class="editorial-container">
+        <div class="editorial-header text-center">
+          <div class="section-label-chip">
+            <span class="chip-dot chip-gold"></span>
+            <span>08 // CRITICAL ACCLAIM</span>
+          </div>
+          <h2 class="editorial-title">THE VERDICT</h2>
+        </div>
+
+        <div class="press-quotes-grid">
+          <blockquote class="press-card glass-panel" data-magnetic>
+            <p class="quote-text">
+              "Aureon redefines the brutalist limits of automotive engineering. The twin-turbo V16 mechanical symphony at 11,500 RPM is unlike anything created in modern motorsport."
+            </p>
+            <div class="quote-author">
+              <b>TOP GEAR MAGAZINE</b>
+              <span>HYPERCAR OF THE DECADE AWARD</span>
+            </div>
+          </blockquote>
+
+          <blockquote class="press-card glass-panel" data-magnetic>
+            <p class="quote-text">
+              "More than an automobile; it is a sacred architectural monument forged from pure titanium, champagne gold, and unrelenting velocity."
+            </p>
+            <div class="quote-author">
+              <b>ROBB REPORT</b>
+              <span>BEST OF THE BEST // PINNACLE COMMISSION</span>
+            </div>
+          </blockquote>
+
+          <blockquote class="press-card glass-panel" data-magnetic>
+            <p class="quote-text">
+              "The turn-in sharpness and downforce suction under braking defies the laws of physics. It makes every track competitor feel a generation behind."
+            </p>
+            <div class="quote-author">
+              <b>EVO MAGAZINE</b>
+              <span>FIVE-STAR PERFORMANCE VERDICT</span>
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 9: ALLOCATION APPLICATION & DIGITAL DOSSIER
+         ========================================================================== -->
+    <section id="section-inquiry" class="editorial-section section-inquiry">
+      <div class="editorial-container">
+        <div class="inquiry-banner glass-panel">
+          <div class="inquiry-left">
+            <span class="mono-tag text-gold">// CHASSIS BUILD ALLOCATION STATUS</span>
+            <h2 class="inquiry-title">ACQUIRE YOUR AUREON CHASSIS</h2>
+            <p class="inquiry-lead">
+              Strictly limited to 50 individually numbered commissions worldwide. 43 allocations are confirmed. Only 7 chassis remain for the 2026 production run.
+            </p>
+            <div class="allocation-meter-wrap">
+              <div class="meter-info">
+                <span>COMMISSION CAPACITY</span>
+                <b>43 OF 50 ALLOCATED [86%]</b>
+              </div>
+              <div class="meter-track">
+                <div class="meter-fill" style="width: 86%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inquiry-right">
+            <button id="btn-inquiry-secure" class="primary-allocation-btn" data-magnetic>
+              <span class="btn-glare"></span>
+              <span class="btn-main-label">[ SECURE ALLOCATION ]</span>
+              <span class="btn-sub-label">INITIALIZE CONFIDENTIAL DOSSIER</span>
+            </button>
+            <button id="btn-download-dossier" class="blueprint-btn" data-magnetic style="margin-top: 1rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-width="1.5"/>
+              </svg>
+              <span>DOWNLOAD 48-PAGE SPECIFICATION DOSSIER (PDF)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         COMPREHENSIVE LUXURY MOTORSPORT FOOTER
+         ========================================================================== -->
+    <footer class="aether-footer" id="site-footer">
+      <div class="footer-inner-wrapper">
+        <div class="footer-columns-grid">
+          <!-- Col 1: Brand & Philosophy -->
+          <div class="footer-col col-brand">
+            <a href="#" class="footer-brand-logo" id="footer-logo-top">
+              <span class="footer-glyph">AU</span>
+              <div class="footer-logo-copy">
+                <b>AUREON</b>
+                <span>AUTOMOTIVE LABS</span>
+              </div>
+            </a>
+            <p class="footer-manifesto">
+              The architecture of speed and light. Dedicated to the relentless perfection of internal combustion, kinetic hybrid propulsion, and carbo-titanium architecture.
+            </p>
+            <div class="footer-hq-badge">
+              <span>HEADQUARTERS & ATELIER</span>
+              <b>ROUTE DE FLORISSANT 42, 1206 GENÈVE, SWITZERLAND</b>
+            </div>
+          </div>
+
+          <!-- Col 2: The Hypercar -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">THE HYPERCAR</h4>
+            <ul class="footer-links-list">
+              <li><a href="#section-genesis" data-magnetic>Aureon Specification 001-A</a></li>
+              <li><a href="#section-core" data-magnetic>Twin-Turbo V16 Architecture</a></li>
+              <li><a href="#section-sanctuary" data-magnetic>Formula Cockpit Sanctuary</a></li>
+              <li><a href="#section-configurator" data-magnetic>Bespoke Finishes & Materials</a></li>
+              <li><a href="#section-powertrain" data-magnetic>Venturi Aerodynamics</a></li>
+              <li><a href="#section-benchmarks" data-magnetic>Telemetry & Performance Specs</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Ownership & Racing -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">OWNERSHIP & RACING</h4>
+            <ul class="footer-links-list">
+              <li><a href="#section-ownership" data-magnetic>Geneva Handover Fitting</a></li>
+              <li><a href="#section-ownership" data-magnetic>Flying Doctor Mechanical Service</a></li>
+              <li><a href="#section-ownership" data-magnetic>Scuderia Private Track Days</a></li>
+              <li><a href="#" id="link-provenance" data-magnetic>Chassis Provenance Registry</a></li>
+              <li><a href="#" id="link-authenticity" data-magnetic>Digital Passport Authentication</a></li>
+              <li><a href="#section-inquiry" data-magnetic>Chassis Allocation Inquiry</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Private Ateliers Worldwide -->
+          <div class="footer-col">
+            <h4 class="footer-col-title">PRIVATE ATELIERS</h4>
+            <ul class="footer-links-list">
+              <li><a href="#" class="link-atelier" data-city="geneva" data-magnetic>Geneva Racing Atelier (HQ)</a></li>
+              <li><a href="#" class="link-atelier" data-city="monaco" data-magnetic>Monaco Yacht Club Concierge</a></li>
+              <li><a href="#" class="link-atelier" data-city="london" data-magnetic>London Mayfair Studio</a></li>
+              <li><a href="#" class="link-atelier" data-city="tokyo" data-magnetic>Tokyo Ginza Concierge</a></li>
+              <li><a href="#" class="link-atelier" data-city="dubai" data-magnetic>Dubai DIFC Private Suite</a></li>
+              <li><a href="#" class="link-atelier" data-city="nyc" data-magnetic>New York Tribeca Loft</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-legal-bar">
+          <div class="legal-left">
+            <p>&copy; 2026 AUREON AUTOMOTIVE LABS S.A. ALL RIGHTS RESERVED.</p>
+            <span class="legal-divider">//</span>
+            <a href="#" class="legal-link" id="link-privacy">PRIVACY POLICY</a>
+            <span class="legal-divider">//</span>
+            <a href="#" class="legal-link" id="link-terms">TERMS OF COMMISSION</a>
+            <span class="legal-divider">//</span>
+            <a href="#" class="legal-link" id="link-cookies">COOKIES PREFERENCES</a>
+          </div>
+
+          <div class="legal-right">
+            <button id="btn-back-to-top" class="btn-top-anchor" aria-label="Return to top of page" data-magnetic>
+              <span>TOP OF PAGE</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 19V5M5 12l7-7 7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ==============================================
+       MODAL 1: TECHNICAL BLUEPRINT DRAWER
+       ============================================== -->
+  <div id="modal-blueprint" class="modal-blueprint" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-blueprint-backdrop"></div>
+    <div class="blueprint-content glass-panel">
+      <div class="blueprint-header">
+        <div>
+          <span class="mono-tag">AUREON CAD/CAM MOTORSPORT SPEC // ARCHITECTURE 001-A</span>
+          <h3 class="blueprint-title">FULL TECHNICAL HYPERCAR SCHEMATIC</h3>
+        </div>
+        <button id="btn-close-blueprint" class="modal-close-btn" aria-label="Close Blueprint modal" data-magnetic>&times;</button>
+      </div>
+
+      <div class="blueprint-grid">
+        <div class="blueprint-visual glass-panel">
+          <div class="visual-header">
+            <span>SCHEMATIC: TWIN_TURBO_HYBRID_440KMH</span>
+            <span class="text-gold">RACE_SYSTEM_READY</span>
+          </div>
+          <div class="blueprint-svg-container">
+            <svg class="blueprint-svg" viewBox="0 0 600 340" fill="none" stroke="currentColor">
+              <defs>
+                <pattern id="cad-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                  <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                </pattern>
+                <linearGradient id="gold-glow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#F59E0B"/>
+                  <stop offset="100%" stop-color="#E2E8F0"/>
+                </linearGradient>
+              </defs>
+              <rect width="600" height="340" fill="url(#cad-grid)"/>
+              <path d="M 60 220 C 100 220 120 180 180 160 C 230 140 340 135 420 160 C 470 175 510 200 540 220 L 530 250 L 70 250 Z" stroke="#F59E0B" stroke-width="2" fill="rgba(245,158,11,0.05)"/>
+              <circle cx="130" cy="245" r="32" stroke="#FFFFFF" stroke-width="2"/>
+              <circle cx="130" cy="245" r="16" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <circle cx="470" cy="245" r="32" stroke="#FFFFFF" stroke-width="2"/>
+              <circle cx="470" cy="245" r="16" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <rect x="230" y="215" width="160" height="30" rx="3" fill="rgba(245, 158, 11, 0.25)" stroke="#F59E0B" stroke-width="1.5"/>
+              <text x="245" y="235" fill="#FBBF24" font-family="JetBrains Mono" font-size="10">TWIN-TURBO V16 1,650 BHP</text>
+              <rect x="65" y="240" width="45" height="8" rx="2" fill="rgba(0,240,255,0.3)" stroke="#00F0FF" stroke-width="1"/>
+              <text x="68" y="247" fill="#FFFFFF" font-family="JetBrains Mono" font-size="6">GROUND-AERO</text>
+              <circle cx="535" cy="235" r="6" stroke="#F59E0B" stroke-width="2" fill="rgba(245,158,11,0.5)"/>
+              <text x="495" y="222" fill="#FFFFFF" font-family="JetBrains Mono" font-size="8">INCONEL VALVED EXHAUST</text>
+              <path d="M 60 170 Q 200 130 540 170" stroke="#00F0FF" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="300" y1="20" x2="300" y2="320" stroke="rgba(255,255,255,0.1)" stroke-dasharray="2 4"/>
+              <line x1="20" y1="180" x2="580" y2="180" stroke="rgba(255,255,255,0.1)" stroke-dasharray="2 4"/>
+            </svg>
+          </div>
+          <div class="visual-footer">
+            <span>TORSIONAL RIGIDITY: 68,000 NM/DEGREE</span>
+            <span>BALANCE: 44.5% F / 55.5% R (MID-REAR)</span>
+          </div>
+        </div>
+
+        <div class="blueprint-specs">
+          <div class="spec-card glass-panel">
+            <h4>01 // INTERNAL COMBUSTION & KINETIC POWERTRAIN</h4>
+            <div class="spec-table">
+              <div class="spec-row"><span>Engine Type</span><b>Mid-Mounted Twin-Turbocharged V16</b></div>
+              <div class="spec-row"><span>Total Output</span><b>1,650 BHP / 1,820 Nm Torque</b></div>
+              <div class="spec-row"><span>Valvetrain</span><b>Pneumatic Titanium Valves, 11,500 RPM</b></div>
+              <div class="spec-row"><span>Exhaust</span><b>3D-Printed Inconel Active Resonance System</b></div>
+            </div>
+          </div>
+
+          <div class="spec-card glass-panel">
+            <h4>02 // TRANSMISSION & CHASSIS</h4>
+            <div class="spec-table">
+              <div class="spec-row"><span>Gearbox</span><b>8-Speed Dual-Clutch Sequential Paddle-Shift</b></div>
+              <div class="spec-row"><span>Shift Latency</span><b>8 Milliseconds (Zero Torque Interruption)</b></div>
+              <div class="spec-row"><span>Chassis</span><b>Pre-Preg Carbo-Titanium Monocoque</b></div>
+              <div class="spec-row"><span>Braking Surface</span><b>Carbon-Ceramic-Silicon 430mm Discs</b></div>
+            </div>
+          </div>
+
+          <div class="spec-card glass-panel">
+            <h4>03 // AERODYNAMICS & SPEED PERFORMANCE</h4>
+            <div class="spec-table">
+              <div class="spec-row"><span>0-100 km/h</span><b>1.7 Seconds (Launch Control Enabled)</b></div>
+              <div class="spec-row"><span>Top Velocity</span><b>440 km/h (273 mph Electronically Governed)</b></div>
+              <div class="spec-row"><span>Downforce</span><b>1,200 kg at 300 km/h (Active Hydraulic Flaps)</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       MODAL 2: VIP ALLOCATION RESERVATION
+       ============================================== -->
+  <div id="modal-allocation" class="modal-allocation" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-allocation-backdrop"></div>
+    <div class="allocation-modal-panel glass-panel">
+      <div class="modal-header">
+        <div>
+          <span class="mono-tag text-gold">// BESPOKE HYPERCAR COMMISSION</span>
+          <h3 class="modal-heading">COMMISSION YOUR AUREON CHASSIS</h3>
+        </div>
+        <button id="btn-close-allocation" class="modal-close-btn" aria-label="Close Allocation modal" data-magnetic>&times;</button>
+      </div>
+
+      <div class="allocation-body" id="allocation-form-view">
+        <p class="allocation-intro">
+          Strictly limited to 50 bespoke builds worldwide. Hand-assembled in champagne titanium and carbo-titanium composite at our Geneva racing facility.
+        </p>
+
+        <form id="form-allocation" class="allocation-form" onsubmit="return false;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="alloc-name">FULL LEGAL NAME</label>
+              <input type="text" id="alloc-name" placeholder="e.g. Julian Vance" required />
+            </div>
+            <div class="form-group">
+              <label for="alloc-email">VIP CONTACT EMAIL</label>
+              <input type="email" id="alloc-email" placeholder="vance@privateoffice.ch" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="alloc-region">DELIVERY ATELIER</label>
+              <select id="alloc-region">
+                <option value="zurich">Zurich / Geneva Racing Atelier (HQ Collection)</option>
+                <option value="monaco">Monaco Yacht Club Atelier</option>
+                <option value="london">London / Mayfair Atelier</option>
+                <option value="tokyo">Tokyo Ginza Concierge</option>
+                <option value="dubai">Dubai DIFC Private Suite</option>
+                <option value="nyc">New York / Tribeca Studio</option>
+                <option value="california">Pebble Beach / Monterey</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="alloc-finish">BESPOKE RACING FINISH</label>
+              <select id="alloc-finish">
+                <option value="champagne-gold">Aureon Liquid Champagne Gold (High-Polished Titanium)</option>
+                <option value="liquid-silver">Liquid Silver & Titanium Chrome (Pure Metal)</option>
+                <option value="obsidian-carbon">Obsidian Matte Black (Exposed Weave)</option>
+                <option value="race-titanium">Motorsport Satin Raw Titanium</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="allocation-summary-box glass-panel">
+            <div class="summary-line">
+              <span>CHASSIS RESERVATION:</span>
+              <strong class="text-gold">AUREON FOUNDER EDITION (#04 OF 50)</strong>
+            </div>
+            <div class="summary-line">
+              <span>COMMISSION DEPOSIT:</span>
+              <strong>$100,000 USD (ESCROW LOCKED)</strong>
+            </div>
+          </div>
+
+          <button type="submit" id="btn-submit-allocation" class="btn-submit-alloc" data-magnetic>
+            <span>TRANSMIT COMMISSION DOSSIER &rarr;</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Screen -->
+      <div class="allocation-success" id="allocation-success-view" style="display: none;">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <h3 class="success-title">COMMISSION RESERVATION CONFIRMED</h3>
+        <p class="success-desc">
+          Your commission request for Aureon Hyper Sports Car chassis <b>#04 / 50</b> has been logged and assigned to the Aureon Motorsport Concierge. Your bespoke chassis authentication passport will be delivered within 24 hours.
+        </p>
+        <div class="success-token glass-panel">
+          <span class="mono-dim">CHASSIS CIPHER:</span>
+          <span class="mono-cipher">AU-2026-FNDR-04-V16-VERIFIED</span>
+        </div>
+        <button id="btn-done-allocation" class="btn-done-alloc" data-magnetic>RETURN TO EXPERIENCE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       MODAL 3: ATELIER LOCATOR MODAL
+       ============================================== -->
+  <div id="modal-atelier" class="modal-blueprint" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-atelier-backdrop"></div>
+    <div class="blueprint-content glass-panel" style="max-width: 800px;">
+      <div class="blueprint-header">
+        <div>
+          <span class="mono-tag text-gold">// GLOBAL ATELIER CONCIERGE</span>
+          <h3 class="blueprint-title">AUREON PRIVATE ATELIERS</h3>
+        </div>
+        <button id="btn-close-atelier" class="modal-close-btn" aria-label="Close Atelier modal" data-magnetic>&times;</button>
+      </div>
+      <div class="ateliers-directory-grid">
+        <div class="atelier-item glass-panel">
+          <span class="mono-tag text-gold">HEADQUARTERS & RACING DIVISION</span>
+          <h4>GENEVA, SWITZERLAND</h4>
+          <p>Route de Florissant 42, 1206 Genève</p>
+          <span>TEL: +41 22 819 00 00 // geneva@aureon-labs.ch</span>
+        </div>
+        <div class="atelier-item glass-panel">
+          <span class="mono-tag text-gold">MEDITERRANEAN PAVILION</span>
+          <h4>MONACO, MONTE CARLO</h4>
+          <p>Quai Louis II, Yacht Club de Monaco</p>
+          <span>TEL: +377 98 06 20 00 // monaco@aureon-labs.ch</span>
+        </div>
+        <div class="atelier-item glass-panel">
+          <span class="mono-tag text-gold">BRITISH MOTORSPORT SUITE</span>
+          <h4>MAYFAIR, LONDON</h4>
+          <p>14 Berkeley Square, London W1J 6BL</p>
+          <span>TEL: +44 20 7499 0000 // london@aureon-labs.ch</span>
+        </div>
+        <div class="atelier-item glass-panel">
+          <span class="mono-tag text-gold">ASIA PACIFIC CONCIERGE</span>
+          <h4>GINZA, TOKYO</h4>
+          <p>6-10-1 Ginza, Chuo-ku, Tokyo 104-0061</p>
+          <span>TEL: +81 3 5537 0000 // tokyo@aureon-labs.ch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic Modules -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
