@@ -9,6 +9,7 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Vercel-Deployed_Globally-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
   <img src="https://img.shields.io/badge/Vite-6.4-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
   <img src="https://img.shields.io/badge/GSAP-3.12-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP" />
   <img src="https://img.shields.io/badge/Lenis-Smooth_Scroll-F59E0B?style=for-the-badge" alt="Lenis" />
@@ -162,6 +163,48 @@ npm run preview
 
 ---
 
+## 🌐 Deploy Globally to Vercel (Edge CDN)
+
+Aureon is pre-configured with [`vercel.json`](./vercel.json) featuring:
+- **Automatic Vite Detection**: Zero manual build settings required.
+- **Global Edge CDN Asset Caching**: 1-year immutable caching (`max-age=31536000, immutable`) for all 180 volumetric `.webp` frames so frames stream instantly worldwide with sub-50ms latency.
+- **Clean URLs & SPA Rewrites**: Seamless deep linking and hardware-accelerated canvas routing.
+
+### Option A: One-Click Deploy (Recommended)
+
+Click the button below to fork and deploy directly onto Vercel's global edge network:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fadarshgaurav1951%2FAureon)
+
+---
+
+### Option B: Deploy via Vercel Web Dashboard
+
+1. Navigate to **[vercel.com/new](https://vercel.com/new)**.
+2. Sign in with GitHub and select your repository **`adarshgaurav1951/Aureon`**.
+3. Vercel automatically detects the project configuration:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+4. Click **Deploy**. Your live global URL (e.g., `https://aureon.vercel.app`) will be generated in ~45 seconds with automated SSL/TLS certificates and global CDN distribution.
+
+---
+
+### Option C: Deploy via Vercel CLI
+
+Deploy instantly from your terminal:
+
+```bash
+# 1. Login & link to Vercel
+npx vercel
+
+# 2. Deploy directly to production
+npx vercel --prod
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -182,6 +225,7 @@ Aureon/
 ├── main.js                                    # GSAP timeline, canvas renderer, configurator & audio engine
 ├── package.json                               # Scripts & project dependencies
 ├── vite.config.js                             # Vite build configuration
+├── vercel.json                                # Vercel Edge CDN caching & SPA routing rules
 └── .gitignore                                 # Standard git ignore rules (node_modules, dist)
 ```
 
